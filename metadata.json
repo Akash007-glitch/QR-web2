@@ -1,0 +1,7 @@
+{
+  "name": "Copy of Lumière Café & Bistro",
+  "description": "A modern, accessible digital cafe experience with table-specific QR ordering, real-time kitchen tracking, and AI-powered recommendations.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
