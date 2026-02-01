@@ -31,21 +31,21 @@ const PaymentGateway: React.FC<PaymentGatewayProps> = ({ total, onConfirm, onCan
         <div className="bg-stone-50 rounded-2xl p-6 mb-8 border border-stone-100">
           <div className="flex justify-between items-center mb-2">
             <span className="text-stone-500 font-medium">Order Total</span>
-            <span className="text-2xl font-black text-amber-600">${total.toFixed(2)}</span>
+            <span className="text-2xl font-black text-amber-600">₹{total.toFixed(2)}</span>
           </div>
           <div className="text-[10px] text-stone-400 uppercase tracking-widest font-bold">LUMIÈRE BISTRO #4029</div>
         </div>
 
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
-             <button className="flex items-center justify-center space-x-2 py-4 bg-black text-white rounded-xl font-bold hover:bg-stone-800 transition-all">
-               <i className="fab fa-apple text-xl"></i>
-               <span>Apple Pay</span>
-             </button>
-             <button className="flex items-center justify-center space-x-2 py-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-all">
-               <i className="fab fa-google text-xl"></i>
-               <span>G Pay</span>
-             </button>
+            <button className="flex items-center justify-center space-x-2 py-4 bg-black text-white rounded-xl font-bold hover:bg-stone-800 transition-all">
+              <i className="fab fa-apple text-xl"></i>
+              <span>Apple Pay</span>
+            </button>
+            <button className="flex items-center justify-center space-x-2 py-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-all">
+              <i className="fab fa-google text-xl"></i>
+              <span>G Pay</span>
+            </button>
           </div>
 
           <div className="relative py-4">
@@ -62,12 +62,11 @@ const PaymentGateway: React.FC<PaymentGatewayProps> = ({ total, onConfirm, onCan
           </div>
         </div>
 
-        <button 
+        <button
           onClick={handlePay}
           disabled={isProcessing}
-          className={`w-full mt-8 py-5 rounded-2xl font-black text-lg shadow-xl transition-all ${
-            isProcessing ? 'bg-stone-200 text-stone-400' : 'bg-amber-600 text-white hover:bg-amber-700 hover:scale-[1.02] shadow-amber-200'
-          }`}
+          className={`w-full mt-8 py-5 rounded-2xl font-black text-lg shadow-xl transition-all ${isProcessing ? 'bg-stone-200 text-stone-400' : 'bg-amber-600 text-white hover:bg-amber-700 hover:scale-[1.02] shadow-amber-200'
+            }`}
         >
           {isProcessing ? (
             <div className="flex items-center justify-center space-x-3">
@@ -75,7 +74,7 @@ const PaymentGateway: React.FC<PaymentGatewayProps> = ({ total, onConfirm, onCan
               <span>Processing...</span>
             </div>
           ) : (
-            `Pay $${total.toFixed(2)}`
+            `Pay ₹${total.toFixed(2)}`
           )}
         </button>
       </div>

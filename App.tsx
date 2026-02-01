@@ -30,7 +30,7 @@ const App: React.FC = () => {
   useEffect(() => {
     const saved = localStorage.getItem('lumiere_live_orders_v3');
     if (saved) setOrders(JSON.parse(saved));
-    
+
     const handleStorageChange = (e: StorageEvent) => {
       if (e.key === 'lumiere_live_orders_v3' && e.newValue) {
         setOrders(JSON.parse(e.newValue));
@@ -74,9 +74,9 @@ const App: React.FC = () => {
 
   const handlePlaceOrder = () => {
     if (!activeTable || cart.length === 0) return;
-    
+
     setIsProcessing(true);
-    
+
     setTimeout(() => {
       const subtotal = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
       const newOrder: Order = {
@@ -93,7 +93,7 @@ const App: React.FC = () => {
       setCart([]);
       setIsProcessing(false);
       setIsCartOpen(false);
-      
+
       setView('Kitchen');
       setOrderSuccess(true);
     }, 800);
@@ -119,27 +119,27 @@ const App: React.FC = () => {
       <div className="min-h-screen bg-stone-900 flex flex-col items-center justify-center p-8 text-center relative overflow-hidden">
         {/* Background Decor */}
         <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-           <div className="absolute -top-20 -left-20 w-64 h-64 bg-amber-500 rounded-full blur-[100px]"></div>
-           <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-amber-500 rounded-full blur-[100px]"></div>
+          <div className="absolute -top-20 -left-20 w-64 h-64 bg-amber-500 rounded-full blur-[100px]"></div>
+          <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-amber-500 rounded-full blur-[100px]"></div>
         </div>
 
         <div className="w-20 h-20 bg-amber-600 rounded-[2.5rem] flex items-center justify-center text-white text-3xl mb-8 shadow-2xl animate-bounce relative z-10">
           <i className="fas fa-qrcode"></i>
         </div>
-        
+
         <h1 className="text-4xl font-black text-white mb-2 tracking-tighter relative z-10">Lumière Bistro</h1>
         <p className="text-stone-400 mb-10 font-medium max-w-xs relative z-10">Select your table or generate a test QR code for your phone.</p>
-        
+
         <div className="grid grid-cols-2 gap-4 w-full max-w-sm relative z-10">
           {TABLES.slice(0, 4).map(t => (
             <div key={t} className="flex flex-col space-y-2">
-              <button 
+              <button
                 onClick={() => setActiveTable(t)}
                 className="py-6 bg-white/5 border border-white/10 text-white rounded-3xl text-xl font-black hover:bg-amber-600 hover:border-amber-600 transition-all active:scale-95"
               >
                 Table {t}
               </button>
-              <button 
+              <button
                 onClick={() => setQrModalData({ tableId: t, customBaseUrl: window.location.origin + window.location.pathname })}
                 className="text-[10px] text-stone-500 font-bold uppercase tracking-widest hover:text-amber-500 transition-colors"
               >
@@ -152,15 +152,15 @@ const App: React.FC = () => {
         {qrModalData && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-stone-950/95 backdrop-blur-xl animate-in fade-in duration-300">
             <div className="bg-white p-8 rounded-[3rem] shadow-2xl max-w-sm w-full text-center relative animate-in zoom-in-95 duration-300">
-              <button 
+              <button
                 onClick={() => setQrModalData(null)}
                 className="absolute -top-3 -right-3 w-10 h-10 bg-stone-900 text-white rounded-full flex items-center justify-center shadow-lg active:scale-90"
               >
                 <i className="fas fa-times"></i>
               </button>
-              
+
               <h3 className="text-xl font-black text-stone-900 mb-2 tracking-tight">Scan Table {qrModalData.tableId}</h3>
-              
+
               <div className="bg-amber-50 p-3 rounded-xl border border-amber-100 mb-6">
                 <p className="text-[10px] text-amber-700 font-bold leading-tight">
                   <i className="fas fa-info-circle mr-1"></i>
@@ -181,8 +181,8 @@ const App: React.FC = () => {
               <div className="space-y-3 text-left">
                 <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest ml-1">Base URL (IP or Domain)</label>
                 <div className="relative">
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     value={qrModalData.customBaseUrl}
                     onChange={(e) => setQrModalData({ ...qrModalData, customBaseUrl: e.target.value })}
                     className="w-full bg-stone-50 border border-stone-100 px-4 py-3 rounded-xl text-xs font-mono text-stone-600 focus:ring-2 focus:ring-amber-500 outline-none transition-all"
@@ -201,8 +201,8 @@ const App: React.FC = () => {
           </div>
         )}
 
-        <button 
-          onClick={() => setView('Kitchen')} 
+        <button
+          onClick={() => setView('Kitchen')}
           className="mt-12 text-stone-500 font-bold uppercase tracking-widest text-[10px] hover:text-white transition-colors py-2 px-6 border border-stone-800 rounded-full relative z-10"
         >
           Staff: Enter Kitchen Mode
@@ -224,11 +224,11 @@ const App: React.FC = () => {
               </p>
               <h1 className="text-3xl font-black text-stone-900 tracking-tighter">Menu.</h1>
             </div>
-            <button 
-              onClick={() => { 
-                setActiveTable(null); 
-                window.history.pushState({}, '', window.location.pathname); 
-              }} 
+            <button
+              onClick={() => {
+                setActiveTable(null);
+                window.history.pushState({}, '', window.location.pathname);
+              }}
               className="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center text-stone-400 active:rotate-180 transition-transform shadow-sm"
             >
               <i className="fas fa-sync-alt"></i>
@@ -240,11 +240,10 @@ const App: React.FC = () => {
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat as any)}
-                className={`px-5 py-2.5 rounded-2xl whitespace-nowrap text-xs font-black tracking-tight border-2 transition-all ${
-                  activeCategory === cat 
-                  ? 'bg-stone-900 border-stone-900 text-white shadow-lg shadow-stone-100' 
-                  : 'bg-white border-stone-100 text-stone-500 hover:border-stone-200'
-                }`}
+                className={`px-5 py-2.5 rounded-2xl whitespace-nowrap text-xs font-black tracking-tight border-2 transition-all ${activeCategory === cat
+                    ? 'bg-stone-900 border-stone-900 text-white shadow-lg shadow-stone-100'
+                    : 'bg-white border-stone-100 text-stone-500 hover:border-stone-200'
+                  }`}
               >
                 {cat}
               </button>
@@ -259,8 +258,8 @@ const App: React.FC = () => {
                   <h3 className="font-black text-stone-900 text-lg leading-tight truncate">{item.name}</h3>
                   <p className="text-stone-400 text-xs line-clamp-2 mt-1 mb-2 font-medium">{item.description}</p>
                   <div className="flex items-center justify-between">
-                    <span className="font-black text-amber-600 text-lg">${item.price.toFixed(2)}</span>
-                    <button 
+                    <span className="font-black text-amber-600 text-lg">₹{item.price.toFixed(2)}</span>
+                    <button
                       onClick={() => addToCart(item)}
                       className="w-10 h-10 bg-stone-900 text-white rounded-xl shadow-lg active:bg-amber-600 transition-colors"
                     >
@@ -275,16 +274,16 @@ const App: React.FC = () => {
       )}
 
       {view === 'Kitchen' && (
-        <KitchenDashboard 
-          orders={orders} 
-          onUpdateStatus={updateOrderStatus} 
+        <KitchenDashboard
+          orders={orders}
+          onUpdateStatus={updateOrderStatus}
           orderSuccess={orderSuccess}
         />
       )}
 
       {view === 'Customer' && cart.length > 0 && (
         <div className="fixed bottom-6 left-6 right-6 z-40">
-          <button 
+          <button
             onClick={() => setIsCartOpen(true)}
             className="w-full bg-stone-900 text-white py-5 rounded-[2rem] shadow-2xl flex items-center justify-between px-8 group active:scale-95 transition-transform"
           >
@@ -295,15 +294,15 @@ const App: React.FC = () => {
               <span className="text-xl font-black tracking-tighter">Review Order</span>
             </div>
             <span className="text-xl font-black text-amber-500">
-              ${cart.reduce((acc, i) => acc + (i.price * i.quantity), 0).toFixed(2)}
+              ₹{cart.reduce((acc, i) => acc + (i.price * i.quantity), 0).toFixed(2)}
             </span>
           </button>
         </div>
       )}
 
-      <CartSidebar 
-        isOpen={isCartOpen} 
-        onClose={() => setIsCartOpen(false)} 
+      <CartSidebar
+        isOpen={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
         items={cart}
         onUpdateQuantity={updateCartQuantity}
         onClear={clearCart}
